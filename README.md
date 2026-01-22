@@ -52,7 +52,7 @@ dependencies:
   - python=3.10
  
 
-Skills demonstrated
+## Skills demonstrated
 1. NGS Pipeline Engineering
  joining reference genome indexing, paired-ends reads alignment, visualisation
 Proficiency in designing, implementing, and managing a robust bioinformatics pipeline
