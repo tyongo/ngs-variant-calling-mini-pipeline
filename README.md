@@ -9,14 +9,13 @@ Align reads to a reference genome, and visualise the alignment
 Variant calling to identify indels and SNPs 
 
 ## Methods
-Bullet list of the pipeline / approach.
-Reference Indexing with BWA
-Read Alignment with BWA-MEM
-Convert to BAM Format with Samtools
-Sort BAM File with Samtools
-Index BAM File with Samtools
-Variant Discovery with Freebayes
-Visualisation of VCF and indexed BAM file with IGV 
+ * Reference Indexing with BWA
+ * Read Alignment with BWA-MEM
+ * Convert to BAM Format with Samtools
+ * Sort BAM File with Samtools
+ * Index BAM File with Samtools
+ * Variant Discovery with Freebayes
+ * Visualisation of VCF and indexed BAM file with IGV 
 
 
 ## Results
