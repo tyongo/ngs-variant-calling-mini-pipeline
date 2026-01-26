@@ -51,6 +51,13 @@ Parameter Configuration:
 	Illumina Universal Adapters were scanned and removed 
 	Minimum length must be at least 20bp to limit multimapping ambiguity 
 
+Trimming Strategy & Rationale:
+• Adapter Selection (3' End): Configured Cutadapt to remove the Illumina Universal Adapter (AGATCGGAAGAG) from the 3' end of reads. This addresses "adapter read-through," a common phenomenon where the sequencing instrument reads beyond the biological insert into the 3' adapter sequence when the RNA fragment is shorter than the read length.
+• Quality Filtering (Phred > 20): Applied a quality cutoff of 20 (99% base call accuracy). This algorithmically trims bases from the 3' end until the quality score rises above 20, preventing low-confidence base calls from interfering with the alignment algorithm (HISAT2).
+• Length Filtering (> 20bp): Implemented a minimum length filter of 20bp. Reads reduced to <20bp after trimming were discarded, as extremely short sequences lack the complexity required for unique genomic mapping and would introduce noise into the count matrix.
+
+
+
 step 4. Splice Aware Genomic Alignment 
 Tool: HISAT2 (Hierarchical Indexing for Spliced Alignment of Transcripts)
 Rationale: HISAT2 will account for introns only present in reference genome but not reads, accurately mapping across exon-exon junctions to prevent overlapping genes which would occur if regular DNA aligners. e.g. Bowtie2 was used. 
