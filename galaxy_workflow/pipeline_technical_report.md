@@ -29,6 +29,21 @@ Quality criteria: Per base sequence quality (Phred scores), GC Content distribut
 Outcome: Identified read degradation at 3'ends and potential adapter read through, to remove adapter sequences from reads, trimming step is performed 
 
 
+Quality Control Configuration:
+• FastQC: Executed using default parameters to assess per-base sequence quality and detect standard Illumina adapter contamination.
+• MultiQC: Configured to aggregate "Raw Data" logs from the FastQC collection to generate a unified quality report.
+	Type of FastQC output? Raw data
+	FastQC output = FastQC on collection 1: RawData
+
+
+	FastQC Configuration Rationale:
+• Contaminant & Adapter Lists (Left Empty): Relied on FastQC’s internal standard library of common adapters (e.g., Illumina Universal, Nextera). Manually supplying a list was unnecessary as standard Illumina adapters were expected and automatically detected.
+• Limits & Submodules (Default): Retained default processing limits to ensure an unbiased assessment of the raw data distribution without artificially filtering out low-quality reads at the visualization stage.
+• Kmer Length (Default 7): Maintained the default Kmer size of 7. This length provides an optimal balance between sensitivity and specificity for detecting overrepresented repetitive motifs and biases in RNA-seq data without introducing excessive noise.
+• Workflow Logic: Crucially, no filtering or trimming was applied within FastQC. This step was strictly reserved for diagnosis, ensuring that the subsequent Cutadapt step addressed identified issues (adapters/quality) based on the raw, unaltered reports.
+
+
+
 step 3. Read Trimming & Artifact Removal 
 Tool: Cutadapt 
 Parameter Configuration:
