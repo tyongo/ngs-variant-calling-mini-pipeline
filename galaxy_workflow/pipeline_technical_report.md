@@ -205,6 +205,41 @@ Rationale: HISAT2 will account for introns only present in reference genome but 
 
 
 
+Alignment Strategy:
+• Aligner Selection (HISAT2): Utilized HISAT2 (Hierarchical Indexing for Spliced Alignment of Transcripts) for mapping. Unlike contiguous genomic aligners, HISAT2 is splice-aware, allowing it to split reads across exon-exon junctions. This is strictly necessary for eukaryotic RNA-seq data where introns are spliced out of the mature transcript.
+• Reference Genome (mm10): Reads were mapped against the Mus musculus (mm10) reference build. Using a built-in indexed genome ensures efficient memory usage and faster alignment speeds compared to uploading a custom FASTA.
+• Input Data: The alignment was performed on the quality-trimmed/filtered reads (output of Cutadapt) rather than raw data, reducing the likelihood of mismatch artifacts caused by adapter read-through.
+
+
+
+
+this specific study uses single-end sequencing. Therefore, the Galaxy collection is a simple list of files rather than a list of forward/reverse pairs. 
+
+
+Quantification Strategy:
+• Strandedness (Unstranded): The counting mode was set to Unstranded. This decision was validated using the RSeQC Infer Experiment tool, which reported an approximately equal distribution of reads aligning to the sense and antisense strands (pseudo-ratio ~0.5), indicating a non-strand-specific library preparation protocol.
+• Gene Annotation: Reads were assigned to gene features using the Gencode/Ensembl annotation provided by the built-in mm10 reference, ensuring compatibility with downstream gene identifiers.
+
+
+
+
+
+Alignment Quality Control:
+• Mapping Statistics: HISAT2 was configured to output an alignment summary file (--summary-file) in a machine-readable format (--new-summary). This specific output is required to integrate the alignment rates (e.g., % uniquely mapped, % unaligned) into the final MultiQC report, allowing for a global assessment of library quality across all replicates.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 5 Gene Quantification 
 Tool - FeatureCounts 
